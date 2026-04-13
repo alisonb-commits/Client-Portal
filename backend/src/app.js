@@ -29,12 +29,8 @@ app.get('/api/health', (req, res) => {
 
 // Routes
 app.use('/api/auth', require('./routes/auth.routes'));
-
-// Protected test route — remove this once auth is confirmed working
-const { protect } = require('./middleware/auth.middleware');
-app.get('/api/auth/me', protect, (req, res) => {
-  res.json({ user: req.user });
-});
+app.use('/api/clients', require('./routes/client.routes'));
+app.use('/api/projects', require('./routes/project.routes'));
 
 // 404 handler — catches any request that didn't match a route
 app.use((req, res) => {
