@@ -1,1 +1,22 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --color-notion-bg: #f7f6f3;
+  --color-notion-sidebar: #fbfaf8;
+  --color-notion-border: #e9e8e4;
+  --color-notion-text: #37352f;
+  --color-notion-muted: #9b9a97;
+  --color-notion-hover: #f1f0ee;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f7f6f3;
+  color: #37352f;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}

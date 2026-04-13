@@ -2,7 +2,12 @@ const { query } = require('../config/db');
 
 const findAll = async (userId) => {
   const result = await query(
-    'SELECT * FROM clients WHERE created_by = $1 ORDER BY created_at DESC',
+    `SELECT c.*, COUNT(p.id)::int AS project_count
+     FROM clients c
+     LEFT JOIN projects p ON p.client_id = c.id
+     WHERE c.created_by = $1
+     GROUP BY c.id
+     ORDER BY c.created_at DESC`,
     [userId]
   );
   return result.rows;

@@ -2,8 +2,18 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
+
+// Rate limiter for auth routes — max 20 requests per 15 minutes per IP
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  message: { error: 'Too many attempts, please try again later' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 // Security headers
 app.use(helmet());
@@ -28,7 +38,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // Routes
-app.use('/api/auth', require('./routes/auth.routes'));
+app.use('/api/auth', authLimiter, require('./routes/auth.routes'));
 app.use('/api/clients', require('./routes/client.routes'));
 app.use('/api/projects', require('./routes/project.routes'));
 
