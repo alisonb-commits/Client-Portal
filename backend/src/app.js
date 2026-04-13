@@ -18,9 +18,20 @@ const authLimiter = rateLimit({
 // Security headers
 app.use(helmet());
 
-// Allow requests from the frontend dev server
+// Allow requests from the frontend
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://client-portal-six-phi.vercel.app',
+];
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin.trim())) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 }));
 
