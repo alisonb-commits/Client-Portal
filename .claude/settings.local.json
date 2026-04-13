@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell -Command \"Remove-Item 'C:\\\\Users\\\\RTX\\\\Documents\\\\Client-Portal\\\\frontend\\\\src\\\\App.css' -Force; Remove-Item 'C:\\\\Users\\\\RTX\\\\Documents\\\\Client-Portal\\\\frontend\\\\src\\\\assets' -Recurse -Force\")"
+    ]
+  }
+}
